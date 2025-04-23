@@ -6,8 +6,6 @@ function Home() {
     // Contenedor principal
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 px-4 text-center">
 
-      {/* posoble logo*/}
-
       {/* Título */}
       <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
         Bienvenido a ContApp
