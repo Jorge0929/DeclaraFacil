@@ -15,6 +15,7 @@ import MainLayout from './layouts/Mainlayout.jsx';
 import AuthLayout from './layouts/Authlayout.jsx';
 import DianGuide from './pages/dian/DianGuide.jsx';
 import ChatPage from './pages/support/ChatPage.jsx';
+import Plans from './pages/plans/Plans.jsx'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
      <BrowserRouter>
@@ -32,6 +33,7 @@ createRoot(document.getElementById('root')).render(
           <Route path="/dian-guide" element={<DianGuide />} />
           <Route path="/history" element={<History />} />
           <Route path="/support" element={<ChatPage />} />
+          <Route path="/plans" element={<Plans />} />
         </Route>
 
       </Routes>

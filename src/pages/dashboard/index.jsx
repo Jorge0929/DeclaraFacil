@@ -34,7 +34,7 @@ function Dashboard() {
         {/* Tarjeta Guía DIAN */}
         <Card title="Guía: Consultar Datos DIAN" className="flex flex-col justify-between">
           <Link to="/dian-guide">
-            <Button className="w-full" variant="secondary">Consultar Guía</Button>
+            <Button className="w-full" variant="succes">Consultar Guía</Button>
           </Link>
         </Card>
 

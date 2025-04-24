@@ -30,7 +30,6 @@ function ChatPage() {
   };
   //
 
-
   return (
     // Contenedor principal que ocupa el espacio dentro de MainLayout
     <div className="h-full flex flex-col bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
