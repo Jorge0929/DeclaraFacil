@@ -13,7 +13,8 @@ import ForgotPassword from './pages/auth/forgot'
 import Dashboard from './pages/dashboard/index.jsx'
 import MainLayout from './layouts/Mainlayout.jsx'; 
 import AuthLayout from './layouts/Authlayout.jsx';
-import DianGuide from './pages/dian/DianGuide.jsx'
+import DianGuide from './pages/dian/DianGuide.jsx';
+import ChatPage from './pages/support/ChatPage.jsx';
 createRoot(document.getElementById('root')).render(
   <StrictMode>
      <BrowserRouter>
@@ -30,6 +31,7 @@ createRoot(document.getElementById('root')).render(
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/dian-guide" element={<DianGuide />} />
           <Route path="/history" element={<History />} />
+          <Route path="/support" element={<ChatPage />} />
         </Route>
 
       </Routes>
