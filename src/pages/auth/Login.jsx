@@ -1,5 +1,8 @@
 import React, { useState } from 'react'; 
 import { Link, useNavigate } from 'react-router-dom'; 
+//Importar componentes
+import InputField from '../../components/ui/InputField'; 
+import Button from '../../components/ui/Button'; 
 
 function Login() {
   // Estados para los inputs usando Hooks
@@ -9,8 +12,6 @@ function Login() {
   // Manejador del formulario
   const handleSubmit = async (event) => { 
     event.preventDefault();
-
-    console.log('Datos para enviar al backend:');
     console.log('Email:', email);
     console.log('Password:', password);
 
@@ -22,40 +23,19 @@ function Login() {
   return (
     // Contenedor principal
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      
       <div className="px-8 py-6 mt-4 text-left bg-white shadow-lg rounded-lg w-full max-w-md"> 
         <h3 className="text-2xl font-bold text-center mb-6">Iniciar Sesión</h3>
-
+        {/* {error && <p className="text-red-500 text-sm mb-4 text-center">{error}</p>}*/}
         {/* Formulario */}
         <form onSubmit={handleSubmit}>
-          <div className="mt-4">
             {/* Campo Email */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700" htmlFor="email">Correo Electrónico</label>
-              <input
-                type="email"
-                placeholder="tuemail@ejemplo.com"
-                id="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                required
+              <InputField label='Correo Electronico' id="email" type="email" placeholder="tuemail@ejemplo.com" value={email} 
+                onChange={(e) => setEmail(e.target.value)} required
               />
-            </div>
 
             {/* Campo Contraseña */}
-            <div className="mt-4">
-              <label className="block text-sm font-medium text-gray-700" htmlFor="password">Contraseña</label>
-              <input
-                type="password"
-                placeholder="Contraseña"
-                id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                required
-              />
-            </div>
+              <InputField label={'Contraseña'} id="password" type="password" placeholder="Contraseña" value={password}
+                onChange={(e) => setPassword(e.target.value)} required />
 
             {/* Enlace Olvidé Contraseña */}
             <div className="text-sm text-right mt-2">
@@ -66,12 +46,9 @@ function Login() {
 
             {/* Botón de Envío */}
             <div className="mt-6">
-              <button
-                type="submit"
-                className="w-full px-6 py-2 text-white bg-indigo-600 rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              >
+              <Button type="submit" className="w-full "> 
                 Iniciar Sesión
-              </button>
+              </Button>
             </div>
 
             {/* Enlace a Registro */}
@@ -80,7 +57,6 @@ function Login() {
               <Link to="/register" className="font-medium text-indigo-600 hover:text-indigo-500">
                 Regístrate
               </Link>
-            </div>
           </div>
         </form>
       </div>
