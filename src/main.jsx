@@ -15,7 +15,12 @@ import MainLayout from './layouts/Mainlayout.jsx';
 import AuthLayout from './layouts/Authlayout.jsx';
 import DianGuide from './pages/dian/DianGuide.jsx';
 import ChatPage from './pages/support/ChatPage.jsx';
-import Plans from './pages/plans/Plans.jsx'
+import Plans from './pages/plans/Plans.jsx';
+import Settings from './pages/settings/Settings.jsx';
+import Faq from './pages/support/Faq.jsx';
+import Terms from './pages/support/Terms.jsx';
+import SecurityPolicy from './pages/legal/SecurityPolicy.jsx';
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
      <BrowserRouter>
@@ -34,6 +39,11 @@ createRoot(document.getElementById('root')).render(
           <Route path="/history" element={<History />} />
           <Route path="/support" element={<ChatPage />} />
           <Route path="/plans" element={<Plans />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/faq" element={<Faq />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/privacy" element={<SecurityPolicy />} />
+
         </Route>
 
       </Routes>
