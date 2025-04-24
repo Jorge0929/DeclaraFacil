@@ -20,6 +20,12 @@ import Settings from './pages/settings/Settings.jsx';
 import Faq from './pages/support/Faq.jsx';
 import Terms from './pages/support/Terms.jsx';
 import SecurityPolicy from './pages/legal/SecurityPolicy.jsx';
+import DeclarationWizard from './pages/declaration/DeclarationWizard.jsx'
+import Step1_PersonalData from './pages/declaration/Step1_PersonalData.jsx';
+import Step2_Income from './pages/declaration/Step2_Income.jsx';
+import Step3_Deductions from './pages/declaration/Step3_Deductions.jsx';
+import DeclarationSummary from './pages/declaration/DeclarationSummary.jsx';
+import DeclarationInstructions from './pages/declaration/DeclarationInstructions.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -43,7 +49,15 @@ createRoot(document.getElementById('root')).render(
           <Route path="/faq" element={<Faq />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy" element={<SecurityPolicy />} />
-
+          
+          <Route path="/declaration" element={<DeclarationWizard />}>
+            <Route index element={<Step1_PersonalData />} />
+            <Route path="personal-data" element={<Step1_PersonalData />} />
+            <Route path="income" element={<Step2_Income />} />
+            <Route path="deductions" element={<Step3_Deductions />} />
+            <Route path="summary" element={<DeclarationSummary />} />
+            <Route path="instructions" element={<DeclarationInstructions />} />
+          </Route>
         </Route>
 
       </Routes>
