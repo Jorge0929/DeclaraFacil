@@ -26,6 +26,7 @@ import Step2_Income from './pages/declaration/Step2_Income.jsx';
 import Step3_Deductions from './pages/declaration/Step3_Deductions.jsx';
 import DeclarationSummary from './pages/declaration/DeclarationSummary.jsx';
 import DeclarationInstructions from './pages/declaration/DeclarationInstructions.jsx';
+import History from './pages/history/History.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -57,6 +58,8 @@ createRoot(document.getElementById('root')).render(
             <Route path="deductions" element={<Step3_Deductions />} />
             <Route path="summary" element={<DeclarationSummary />} />
             <Route path="instructions" element={<DeclarationInstructions />} />
+            <Route path="history" element={<History />} />
+            
           </Route>
         </Route>
 

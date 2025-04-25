@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FiBell, FiUser } from 'react-icons/fi'; // Asumiendo react-icons
+import { FiBell, FiUser } from 'react-icons/fi'; 
 
-// Ya NO recibe toggleSidebar como prop
 function Navbar() {
   const userName = "Ana Perez"; // Placeholder
 
@@ -10,14 +9,11 @@ function Navbar() {
     <nav className="bg-white shadow-sm h-16 flex-shrink-0">
       <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
-          {/* Sección Izquierda: Ahora podría estar vacía o tener otros elementos si quisieras */}
           <div className="flex items-center">
-             {/* El logo se movió conceptualmente a la Sidebar en tu última imagen,
-                 así que dejamos esto vacío o ponemos algo más si es necesario.
-                 Si quieres mantener el logo aquí TAMBIÉN, puedes hacerlo. */}
+
           </div>
 
-          {/* Iconos y Perfil (Derecha) - sin cambios */}
+          {/* Iconos y Perfil */}
           <div className="flex items-center">
             <button className="ml-4 p-1 rounded-full text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
               <span className="sr-only">Ver notificaciones</span>

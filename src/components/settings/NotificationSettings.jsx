@@ -26,7 +26,6 @@ function NotificationSettings() {
     promociones: false,
     newsletter: true,
   });
-  // ---------------------------------------------------------------
 
   const [message, setMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);

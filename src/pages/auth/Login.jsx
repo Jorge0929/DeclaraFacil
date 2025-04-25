@@ -25,8 +25,6 @@ function Login() {
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="px-8 py-6 mt-4 text-left bg-white shadow-lg rounded-lg w-full max-w-md"> 
         <h3 className="text-2xl font-bold text-center mb-6">Iniciar Sesión</h3>
-        {/* {error && <p className="text-red-500 text-sm mb-4 text-center">{error}</p>}*/}
-        {/* Formulario */}
         <form onSubmit={handleSubmit}>
             {/* Campo Email */}
               <InputField label='Correo Electronico' id="email" type="email" placeholder="tuemail@ejemplo.com" value={email} 

@@ -18,7 +18,7 @@ function DianGuide() {
     "Busca en el reporte descargado o en pantalla las secciones clave que te pediremos en ContApp, como ingresos, retenciones, etc. Puede verse similar a esto:",
     // Placeholder imagen guía
     <div key="image-placeholder" className="my-4 p-4 border border-dashed border-gray-400 text-center text-gray-500 bg-gray-50 rounded">
-      [Placeholder: Imagen Guía - Captura genérica del portal DIAN mostrando dónde buscar]
+      [Placeholder: Captura del portal DIAN mostrando dónde buscar]
     </div>,
     "Anota o ten a mano los valores relevantes que encuentres para ingresarlos en ContApp cuando te los solicitemos en los pasos correspondientes de la preparación."
   ];

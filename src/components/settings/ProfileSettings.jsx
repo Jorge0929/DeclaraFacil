@@ -50,7 +50,6 @@ function ProfileSettings() {
       <div className="mb-8 p-4 border rounded-md bg-gray-50">
          <p className="mb-2"><span className="font-medium text-gray-600">Nombre:</span> {user.firstName} {user.lastName}</p>
          <p><span className="font-medium text-gray-600">Correo Electrónico:</span> {user.email}</p>
-         {/* añadir un botón editar nombre/apellido */}
       </div>
 
 
