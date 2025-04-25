@@ -39,25 +39,6 @@ Este repositorio contiene el código fuente de la **fase frontend** del proyecto
 * **Gestor de Paquetes:** npm
 * **Iconos:** React Icons (recomendado)
 
-## Estructura del Proyecto (Simplificada)
-├── public/
-├── src/
-│   ├── assets/       # CSS, Imágenes, etc.
-│   ├── components/   # Componentes UI reutilizables (ui, layout, shared)
-│   ├── contexts/     # (Opcional) Context API
-│   ├── hooks/        # (Opcional) Custom Hooks
-│   ├── layouts/      # Componentes de Layout principales (MainLayout, AuthLayout)
-│   ├── pages/        # Componentes de Página (cada ruta principal)
-│   ├── router/       # (Opcional) Configuración de Rutas
-│   ├── services/     # (Opcional) Llamadas a API
-│   ├── utils/        # (Opcional) Utilidades
-│   ├── App.jsx       # Componente raíz
-│   └── main.jsx      # Punto de entrada
-├── .gitignore
-├── index.html
-├── package.json
-├── postcss.config.js
-└── tailwind.config.js
 ## Cómo Empezar (Desarrollo Local)
 
 1.  **Clonar el repositorio:**
