@@ -5,11 +5,11 @@ import { createRoot } from 'react-dom/client'
 import './assets/css/index.css'
 
 //Importar paginas
-import Home from './pages/home'
-import Login from './pages/auth/Login'
-import Register from './pages/auth/Register'
+import Home from './pages/home/index.jsx'
+import Login from './pages/auth/Login.jsx'
+import Register from './pages/auth/Register.jsx'
 import ResetPassword from './pages/auth/ResetPassword'
-import ForgotPassword from './pages/auth/forgot'
+import ForgotPassword from './pages/auth/forgot.jsx'
 import Dashboard from './pages/dashboard/index.jsx'
 import MainLayout from './layouts/Mainlayout.jsx'; 
 import AuthLayout from './layouts/Authlayout.jsx';
