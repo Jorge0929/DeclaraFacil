@@ -80,19 +80,5 @@ Este proyecto está diseñado para ser desplegado fácilmente en plataformas com
 * Persistencia de datos y estado del usuario.
 * Integración con pasarela de pagos.
 
-Instrucciones:
-
-Copia todo el texto anterior.
-Abre el archivo README.md en la raíz de tu proyecto.
-Borra el contenido actual que te genera Vite.
-Pega el nuevo contenido que te he proporcionado.
-Personaliza:
-Reemplaza [Tu Nombre Completo] por tu nombre.
-Ajusta la fecha si es necesario.
-Reemplaza https://minhaskamal.github.io/DownGit/ por la URL real cuando lo tengas en GitHub/GitLab.
-Revisa la lista de "Características Implementadas" y ajústala si has hecho algo más o algo menos de lo que generamos.
-Añade cualquier otra sección que consideres relevante para tu profesor o para alguien que vea el proyecto.
-Guarda el archivo README.md.
-Ahora tendrás un README mucho más descriptivo y útil para tu proyecto ContApp.
 
 
