@@ -1,35 +1,37 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'; 
+import { Link, useNavigate } from 'react-router-dom'; 
+import { getUserDeclarations } from '../../services/declarationService';
+import Button from '../../components/ui/Button';
 
 function History() {
-  // guardar el historial de declaraciones
-  const [declarations, setDeclarations] = useState([]);
-  //  manejar la carga
-  const [isLoading, setIsLoading] = useState(true);
-  //  manejar errores
-  const [error, setError] = useState(null);
+    const [declarations, setDeclarations] = useState([]);
+    const [isLoading, setIsLoading] = useState(true); // Empezar en true para mostrar carga inicial
+    const [error, setError] = useState(null);
+    const navigate = useNavigate();
 
-  // Simulación de carga de datos aomponente
-  useEffect(() => {
-    setIsLoading(true);
-    setError(null);
-    console.log("Cargando historial...");
+    useEffect(() => {
+        const fetchDeclarations = async () => {
+            setIsLoading(true);
+            setError(null);
+            console.log("History.jsx: Intentando cargar historial...");
+            try {
+              // Llama al servicio
+                const data = await getUserDeclarations(); 
+                console.log("History.jsx: Datos recibidos del servicio:", data);
+                setDeclarations(Array.isArray(data) ? data : []);
+            } catch (err) {
+                console.error("History.jsx: Error al cargar historial:", err);
+                setError(err.message || 'Error al cargar el historial de declaraciones.');
+                // Limpiar en caso de error
+                setDeclarations([]); 
+            } finally {
+                setIsLoading(false);
+            }
+        };
 
-    // Simulación con datos 
-    const timer = setTimeout(() => {
-      const exampleData = [
-        { id: '1', year: 2023, datePrepared: '2024-04-15', result: '$ 150.000 (A Pagar)', statusContApp: 'Instrucciones Vistas' },
-        { id: '2', year: 2022, datePrepared: '2023-05-20', result: '$ 80.000 (A Favor)', statusContApp: 'Borrador Guardado' },
-        { id: '3', year: 2021, datePrepared: '2022-06-10', result: '$ 0 (Sin Saldo)', statusContApp: 'Borrador Guardado' },
-      ];
-      setDeclarations(exampleData);
-      setIsLoading(false);
-    }, 1200); 
-
-    // Limpia el timer 
-    return () => clearTimeout(timer);
-
-  }, []); 
+        fetchDeclarations();
+    }, []); 
+ 
 
   let content;
 
@@ -42,45 +44,70 @@ function History() {
   } else {
     // Si hay datos, renderiza la tabla
     content = (
-      <div className="overflow-x-auto shadow border-b border-gray-200 sm:rounded-lg"> {/* Añade sombra y bordes redondeados */}
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
-            <tr>
-              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Año Fiscal</th>
-              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha Preparación</th>
-              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Resultado (ContApp)</th>
-              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Estado (ContApp)</th>
-              <th scope="col" className="relative px-6 py-3">
-                <span className="sr-only">Acciones</span>
-              </th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            {declarations.map((dec) => (
-              <tr key={dec.id} className="hover:bg-gray-50"> 
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{dec.year}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{dec.datePrepared}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{dec.result}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                   <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                     dec.statusContApp === 'Instrucciones Vistas' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'
-                   }`}>
-                     {dec.statusContApp}
-                   </span>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                  <button
-                    onClick={() => alert(`Implementar vista de detalle para año ${dec.year}`)}
-                    className="text-indigo-600 hover:text-indigo-900 hover:underline focus:outline-none"
-                  >
-                    Ver Resumen
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <div className="overflow-x-auto shadow border-b border-gray-200 sm:rounded-lg">
+            <table className="min-w-full divide-y divide-gray-200">
+                <thead className="bg-gray-50">
+                    <tr>
+                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Año Fiscal</th>
+                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Última Modificación</th>
+                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Resultado (Estimado)</th> {/* Ajustado */}
+                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Estado</th>
+                        <th scope="col" className="relative px-6 py-3">
+                            <span className="sr-only">Acciones</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-200">
+                    {declarations.map((dec) => {
+                        // CONSOLE.LOG PARA VER QUÉ CONTIENE 'dec'
+                        console.log("Datos de la declaración individual (dec) para mapear:", dec);
+                        return (
+                            <tr key={dec._id} className="hover:bg-gray-50"> {/* USA dec._id */}
+                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{dec.añoFiscal}</td> {/* USA dec.añoFiscal */}
+                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    {/* USA dec.updatedAt y formatéalo */}
+                                    {dec.updatedAt ? new Date(dec.updatedAt).toLocaleDateString('es-CO', {
+                                        year: 'numeric', month: 'long', day: 'numeric',
+                                        // Opcional: añadir hora si quieres
+                                        // hour: '2-digit', minute: '2-digit'
+                                    }) : 'N/A'}
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    {/* Decide qué mostrar para "Resultado". Puede ser de dec.resumenEstimado si existe */}
+                                    {/* Ejemplo: Muestra saldo a pagar o a favor si existen en el resumen */}
+                                    {dec.resumenEstimado?.saldoAPagar && dec.resumenEstimado.saldoAPagar !== '$ 0' ? `Pagar: ${dec.resumenEstimado.saldoAPagar}` :
+                                     dec.resumenEstimado?.saldoAFavor && dec.resumenEstimado.saldoAFavor !== '$ 0' ? `Favor: ${dec.resumenEstimado.saldoAFavor}` :
+                                     'N/D'}
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap text-sm">
+                                    {/* USA dec.estado */}
+                                    {dec.estado && (
+                                        <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                                            dec.estado === 'finalizado_en_app' ? 'bg-green-100 text-green-800' :
+                                            dec.estado === 'presentado_dian' ? 'bg-blue-100 text-blue-800' : 
+                                            'bg-yellow-100 text-yellow-800' // Para 'en_progreso'
+                                        }`}>
+                                            {/* Formatear para mejor visualización */}
+                                            {dec.estado.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())}
+                                        </span>
+                                    )}
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <Button
+                                        variant="secondary" // O el estilo que prefieras
+                                        // Actualiza esta navegación cuando implementes la edición
+                                        onClick={() => navigate(`/declaration/${dec._id}`)} 
+                                        className="text-xs"
+                                    >
+                                        Ver / Continuar
+                                    </Button>
+                                </td>
+                            </tr>
+                        );
+                    })}
+                </tbody>
+            </table>
+        </div>
     );
   }
 
