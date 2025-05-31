@@ -4,7 +4,7 @@ const API_BASE_URL = `${import.meta.env.VITE_API_BASE_URL}/auth`;
 
 // Función para registrar un nuevo usuario
 export const register = async (userData) => {
-    const response = await fetch(`${API_BASE_URL}/register`, {
+    const response = await fetch(`https://contapp-api.onrender.com/api/auth/register`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
