@@ -1,6 +1,8 @@
 // src/pages/declaration/DeclarationWizard.jsx
 import React, { useState } from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
+import { createDeclaration } from '../../services/declarationService';
+import {useNavigate } from 'react-router-dom'; 
 
 // Componente de indicador de progreso
 const ProgressIndicator = ({ currentPath }) => {
@@ -17,33 +19,74 @@ const ProgressIndicator = ({ currentPath }) => {
 
 
 function DeclarationWizard() {
-  //ESTADO GLOBAL DEL FORMULARIO 
-  const [declarationData, setDeclarationData] = useState({
-    personalData: {},
-    income: {},
-    deductions: {},
-  });
+    const [declarationData, setDeclarationData] = useState({
+        personalData: {},
+        income: {},
+        deductions: {},
+        summaryData: {}, // Para guardar el resumen calculado por el frontend si lo deseas
+        añoFiscal: new Date().getFullYear() -1, // Ejemplo, o obtén esto de alguna parte
+        // Puedes añadir un campo para el ID de la declaración si estás editando
+        // _id: null,
+    });
 
-  // Para saber la ruta actual para el indicador
-  const location = useLocation(); 
+    //redirigir
+    const navigate = useNavigate(); 
 
-  //  actualizar los datos de un paso
-  const updateStepData = (stepName, data) => {
-    setDeclarationData(prevData => ({
-      ...prevData,
-      [stepName]: data,
-    }));
-    console.log("Datos actualizados:", stepName, data);
-  };
+    // Estados para el proceso de envío de la declaración
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitError, setSubmitError] = useState(null);
 
-  return (
-    <div className="max-w-3xl mx-auto"> 
-      <h1 className="text-2xl font-bold mb-2">Preparar Declaración de Renta</h1>
-      <ProgressIndicator currentPath={location.pathname} />
+    const updateStepData = (stepName, data) => {
+        console.log(`DeclarationWizard: Actualizando datos para ${stepName}`, data);
+        setDeclarationData(prevData => ({
+            ...prevData,
+            [stepName]: data,
+        }));
+    };
 
-      <Outlet context={{ updateStepData, declarationData }} />
-    </div>
-  );
+    // manejar el envio final
+    const handleFinalSubmitDeclaration = async () => {
+        console.log('DeclarationWizard: Intentando enviar declaración completa:', declarationData);
+        setIsSubmitting(true);
+        setSubmitError(null);
+
+        try {
+            const payload = {
+                añoFiscal: declarationData.añoFiscal,
+                datosPersonales: declarationData.personalData,
+                ingresos: declarationData.income,
+                deducciones: declarationData.deductions,
+                resumenEstimado: declarationData.summaryData, 
+            };
+
+            // Llama al servicio
+            const result = await createDeclaration(payload); 
+            console.log('DeclarationWizard: Declaración guardada exitosamente!', result);
+            // Redirigir al historial
+            navigate('/history'); 
+
+        } catch (err) {
+            console.error('DeclarationWizard: Error al enviar la declaración:', err);
+            setSubmitError(err.message || 'Ocurrió un error al guardar la declaración.');
+            // El error se mostrará en el componente que lo necesite 
+            setIsSubmitting(false);
+        }
+    };
+
+    return (
+        <div className="max-w-3xl mx-auto">
+            <h1 className="text-2xl font-bold mb-2">Preparar Declaración de Renta</h1>
+
+            {/* Pasamos la nueva función y estados al contexto del Outlet */}
+            <Outlet context={{
+                updateStepData,
+                declarationData,
+                handleFinalSubmitDeclaration, 
+                isSubmitting,                 
+                submitError                 
+            }} />
+        </div>
+    );
 }
 
 export default DeclarationWizard;
