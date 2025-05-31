@@ -18,16 +18,6 @@ export const AuthProvider = ({ children }) => {
     const [isLoading, setIsLoading] = useState(!!initialToken); 
     const [error, setError] = useState(null);
     const navigate = useNavigate();
-
-    console.log(
-        `%cAuthContext: Estado Inicial al Montar Provider%c
-        Token: ${token}
-        User: ${JSON.stringify(user)}
-        IsAuthenticated: ${isAuthenticated}
-        IsLoading: ${isLoading}`,
-        'color: blue; font-weight: bold;', 'color: black;'
-    );
-
     useEffect(() => {
         const verifyAuth = async () => {
             console.log('%cAuthContext useEffect: Iniciando verificación de token existente...', 'color: orange;');
