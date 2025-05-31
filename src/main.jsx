@@ -27,43 +27,44 @@ import Step3_Deductions from './pages/declaration/Step3_Deductions.jsx';
 import DeclarationSummary from './pages/declaration/DeclarationSummary.jsx';
 import DeclarationInstructions from './pages/declaration/DeclarationInstructions.jsx';
 import History from './pages/history/History.jsx';
+import { AuthProvider } from './context/AuthContext';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
      <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route element={<AuthLayout />}>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/reset-password" element={<ResetPassword />} />
-        </Route>
+      <AuthProvider> 
+                <Routes>
+                    <Route path="/" element={<Home />} />
 
-        <Route element={<MainLayout />}>
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/dian-guide" element={<DianGuide />} />
-          <Route path="/history" element={<History />} />
-          <Route path="/support" element={<ChatPage />} />
-          <Route path="/plans" element={<Plans />} />
-          <Route path="/settings" element={<Settings />} />
-          <Route path="/faq" element={<Faq />} />
-          <Route path="/terms" element={<Terms />} />
-          <Route path="/privacy" element={<SecurityPolicy />} />
-          
-          <Route path="/declaration" element={<DeclarationWizard />}>
-            <Route index element={<Step1_PersonalData />} />
-            <Route path="personal-data" element={<Step1_PersonalData />} />
-            <Route path="income" element={<Step2_Income />} />
-            <Route path="deductions" element={<Step3_Deductions />} />
-            <Route path="summary" element={<DeclarationSummary />} />
-            <Route path="instructions" element={<DeclarationInstructions />} />
-            <Route path="history" element={<History />} />
-            
-          </Route>
-        </Route>
+                    <Route element={<AuthLayout />}>
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/register" element={<Register />} />
+                        <Route path="/forgot-password" element={<ForgotPassword />} />
+                        <Route path="/reset-password" element={<ResetPassword />} />
+                    </Route>
 
-      </Routes>
+                        <Route element={<MainLayout />}>
+                            <Route path="/dashboard" element={<Dashboard />} />
+                            <Route path="/dian-guide" element={<DianGuide />} />
+                            <Route path="/history" element={<History />} />
+                            <Route path="/support" element={<ChatPage />} />
+                            <Route path="/plans" element={<Plans />} />
+                            <Route path="/settings" element={<Settings />} />
+                            <Route path="/faq" element={<Faq />} />
+                            <Route path="/terms" element={<Terms />} />
+                            <Route path="/privacy" element={<SecurityPolicy />} />
+                            
+                            <Route path="/declaration" element={<DeclarationWizard />}>
+                                <Route index element={<Step1_PersonalData />} />
+                                <Route path="personal-data" element={<Step1_PersonalData />} />
+                                <Route path="income" element={<Step2_Income />} />
+                                <Route path="deductions" element={<Step3_Deductions />} />
+                                <Route path="summary" element={<DeclarationSummary />} />
+                                <Route path="instructions" element={<DeclarationInstructions />} />
+                            </Route>
+                        </Route>
+                </Routes>
+            </AuthProvider>
       </BrowserRouter>
   </StrictMode>,
 )
